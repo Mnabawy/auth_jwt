@@ -34,12 +34,6 @@ class UserController extends Controller
     }
 
 
-    public function getUsers()
-    {
-        $users = User::all();
-        return $users;
-    }
-
     // login
     public function login()
     {
@@ -71,5 +65,19 @@ class UserController extends Controller
         $response['code'] = 200;
         $response['message'] = "Login Successfully";
         return response()->json($response);
+    }
+
+    public function user($id)
+    {
+        $user = User::find($id);
+        if ($user) {
+
+            $response['message'] = 'user is exist';
+            return response()->json($response);
+        } else {
+            $response['message'] = 'user not found';
+
+            return response()->json($response);
+        }
     }
 }

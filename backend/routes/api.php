@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,21 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('register', [UserController::class, 'register']);
 
-Route::get('users', [UserController::class, 'getUsers']);
+Route::get(
+    'users',
+    function () {
+        echo 'hello';
+    }
+    // [UserController::class, 'getUsers']
+);
 
 Route::post('login', [UserController::class, 'login']);
+
+
+// get specific user 
+Route::get('user/{id}', [UserController::class, 'user']);
+
+Route::get('photo', [PhotoController::class, 'index']);
+Route::post('ceatePhoto', [PhotoController::class, 'store']);
+Route::delete('deletePhoto/{id}', [PhotoController::class, 'destroy']);
+Route::put('updatePhoto/{id}', [PhotoController::class, 'update']);
